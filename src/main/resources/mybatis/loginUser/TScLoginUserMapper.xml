@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.triber.demo.demo.dao.mapper.loginUser.TScLoginUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.triber.demo.demo.model.loginUser.TScLoginUser">
+        <result column="LOGIN_ID" property="loginId"/>
+        <result column="LOGIN_NAME" property="loginName"/>
+        <result column="PASS_WORD" property="passWord"/>
+        <result column="PROVINCE_NO" property="provinceNo"/>
+        <result column="AREA_NO" property="areaNo"/>
+        <result column="CITY_NO" property="cityNo"/>
+        <result column="DEPARTMENT" property="department"/>
+        <result column="GENDER" property="gender"/>
+        <result column="MOBILE_PHONE" property="mobilePhone"/>
+        <result column="EMAIL" property="email"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="MODIF_USER" property="modifUser"/>
+        <result column="MODIF_DATE" property="modifDate"/>
+        <result column="STATUS" property="status"/>
+        <result column="REMARK" property="remark"/>
+        <result column="PBC_CODE" property="pbcCode"/>
+        <result column="DATA_PROVINCE_NO" property="dataProvinceNo"/>
+        <result column="DATA_AREA_NO" property="dataAreaNo"/>
+        <result column="DATA_CITY_NO" property="dataCityNo"/>
+        <result column="INIT_PWD" property="initPwd"/>
+        <result column="BUSINESS_DEPT" property="businessDept"/>
+        <result column="USER_TYPE" property="userType"/>
+        <result column="INSTEAD_REPORT" property="insteadReport"/>
+        <result column="CLASS_ID" property="classId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        LOGIN_ID, LOGIN_NAME, PASS_WORD, PROVINCE_NO, AREA_NO, CITY_NO, DEPARTMENT, GENDER, MOBILE_PHONE, EMAIL, CREATE_USER, CREATE_DATE, MODIF_USER, MODIF_DATE, STATUS, REMARK, PBC_CODE, DATA_PROVINCE_NO, DATA_AREA_NO, DATA_CITY_NO, INIT_PWD, BUSINESS_DEPT, USER_TYPE, INSTEAD_REPORT, CLASS_ID
+    </sql>
+    <select id="selectUserList" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ADM.T_SC_LOGIN_USER
+    </select>
+
+</mapper>
