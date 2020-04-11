@@ -4,7 +4,7 @@
 * [mybatis yml配置参考文档](https://www.jianshu.com/p/cfb84fee0a98)
 ### 集成步骤
 <strong>pom.xml 添加配置</strong>
-```xml
+```text
        <!--spring boot 启动引擎-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,7 +52,7 @@
         </dependency>
 ```
 <strong>复制 或添加 application.yml 添加配置</strong>
-```properties
+```text
 server:
   port: 8081
 spring:
@@ -222,3 +222,91 @@ mybatis-plus:
 * 将CodeGenerator 复制到和启动类同级目录下 并修改数据库 描述人等配置
 * 将common文件夹 包括（MybatisPlusConfig，Query，R）
 * 注意在Mapper接口中配置@Mapper 注解 以及  application.yml中 `mapper-locations: classpath*:/mybatis/**/*.xml`的路径配置
+
+<strong>Swagger 使用</strong>
+### 导入包
+#### 访问界面 http://{ip}:{port}/docs.html
+```$xml
+        <!--引入Swagger2的依赖-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <!--引入Swagger 美化包-->
+        <dependency>
+            <groupId>com.github.caspar-chen</groupId>
+            <artifactId>swagger-ui-layer</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+```
+### 创建配置类
+```java
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+    @Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("org.triber.demo.demo.api.loginUser"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("Spring Boot中使用Swagger2构建RESTful APIs")
+                .description("Swagger2构建RESTful APIs")
+                .termsOfServiceUrl("http://www.baidu.com/")
+                .version("1.0")
+                .build();
+    }
+}
+```
+### 注解配置参考
+```text
+@ApiOperation：用在方法上，说明方法的作用
+    value: 表示接口名称
+    notes: 表示接口详细描述 
+@ApiOperation(value="获取用户列表", notes="获取所有用户列表",produces = "application/json")
+
+@ApiImplicitParams：用在方法上包含一组参数说明
+@ApiImplicitParams({
+        @ApiImplicitParam(name = "id",value = "用户ID",paramType = "path",dataType = "int"),
+        @ApiImplicitParam(name = "userName",value = "用户名称",paramType = "form",dataType = "string")
+})
+
+@ApiImplicitParam：用在@ApiImplicitParams注解中，指定一个请求参数的各个方面
+@ApiImplicitParam(name = "userId",value = "用户ID",dataType = "int",paramType = "path")
+paramType：参数位置
+header 对应注解：@RequestHeader
+query 对应注解：@RequestParam
+path  对应注解: @PathVariable
+body 对应注解: @RequestBody
+name：参数名
+dataType：参数类型
+required：参数是否必须传
+value：参数的描述
+defaultValue：参数的默认值
+
+@ApiModel(value = "user", description = "user对象")
+public class UserModel {
+    @ApiModelProperty(value = "ID", dataType = "Integer", required = true)
+    private Integer userId;
+    @ApiModelProperty(value = "用戶名", dataType = "String")
+    private String userName;
+    @ApiModelProperty(value = "性別", dataType = "Integer", allowableValues = "0,1,2")
+    private Integer sex;
+}
+
+@ApiResponses：用于表示一组响应
+
+@ApiResponse：用在@ApiResponses中，一般用于表达一个错误的响应信息
+code：状态码
+message：返回自定义信息
+response：抛出异常的类
+
+@ApiIgnore: 表示该接口函数不对swagger2开放展示
+```
