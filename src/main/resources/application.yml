@@ -23,6 +23,18 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     useGlobalDataSourceStat: true
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    jedis:
+      pool:
+        max-active: 50
+        max-wait: -1
+        max-idle: 20
+        min-idle: 2
+    timeout: 5000
+    password: password
 mybatis-plus:
   mapper-locations: classpath*:/mybatis/**/*.xml
   global-config:
