@@ -1,5 +1,7 @@
 package org.triber.demo.demo.common;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author: wl
  * @date: 2018年10月9日 下午2:39:20
  */
+@Data
 public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,38 +57,6 @@ public class R<T> implements Serializable {
         super();
         this.msg = e.getMessage();
         this.code = FAIL;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public long getCount() {
-        return count;
-    }
-
-    public void setCount(long count) {
-        this.count = count;
     }
 
 }

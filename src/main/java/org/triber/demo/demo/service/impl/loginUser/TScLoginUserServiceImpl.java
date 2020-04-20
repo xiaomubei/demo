@@ -20,7 +20,12 @@ public class TScLoginUserServiceImpl extends ServiceImpl<TScLoginUserMapper, TSc
 
     @Override
     public Page selectUserPage(Map<String, Object> map) {
-        Page page = new Page(1, 10);// 当前页，总条数
+        Page page = new Page(Integer.parseInt(map.get("page").toString()), 10);// 当前页，总条数
         return page.setRecords(this.baseMapper.selectUserList(page, map));
+    }
+
+    @Override
+    public Map<String, String> loadLoginUser(String userName, String userPass) {
+        return this.baseMapper.loadLoginUser(userName, userPass);
     }
 }

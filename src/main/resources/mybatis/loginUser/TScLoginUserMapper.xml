@@ -40,5 +40,8 @@
         <include refid="Base_Column_List"/>
         FROM ADM.T_SC_LOGIN_USER
     </select>
+    <select id="loadLoginUser" resultType="java.util.Map">
+        SELECT LOGIN_NAME,PASS_WORD FROM ADM.T_SC_LOGIN_USER WHERE LOGIN_NAME=#{userName} AND PASS_WORD=#{userPass}
+    </select>
 
 </mapper>

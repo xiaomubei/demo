@@ -267,6 +267,9 @@ public class SwaggerConfig {
 ```
 ### 注解配置参考
 ```text
+@Api：用在请求的类上，说明该类的作用
+    tags="说明该类的作用"
+    value="该参数没什么意义，所以不需要配置"
 @ApiOperation：用在方法上，说明方法的作用
     value: 表示接口名称
     notes: 表示接口详细描述 

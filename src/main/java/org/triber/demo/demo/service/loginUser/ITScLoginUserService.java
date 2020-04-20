@@ -14,4 +14,7 @@ import java.util.Map;
  */
 public interface ITScLoginUserService extends IService<TScLoginUser> {
     Page selectUserPage(Map<String, Object> map);
+
+    Map<String, String> loadLoginUser(String userName, String userPass);
+
 }

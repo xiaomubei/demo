@@ -20,4 +20,7 @@ import java.util.Map;
 @Mapper
 public interface TScLoginUserMapper extends BaseMapper<TScLoginUser> {
     List selectUserList(Page page, @Param("params") Map<String, Object> map);
+
+    Map<String, String> loadLoginUser(String userName, String userPass);
+
 }
