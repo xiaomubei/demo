@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.triber.demo.demo.common.AjaxResult;
 import org.triber.demo.demo.common.R;
 import org.triber.demo.demo.common.RedisUtil;
 import org.triber.demo.demo.service.loginUser.ITScLoginUserService;
@@ -55,8 +56,28 @@ public class TScLoginUserController {
             @ApiImplicitParam(name = "userName", value = "用户账号", paramType = "query", dataType = "String", defaultValue = "侯加林", required = true),
             @ApiImplicitParam(name = "userPass", value = "用户密码", paramType = "query", dataType = "String", defaultValue = "password", required = true)
     })
-    @RequestMapping("/getUser")
-    public Map getUser(@RequestParam(value = "userName") String userName, @RequestParam(value = "userPass") String userPass) {
-        return tScLoginUserService.loadLoginUser(userName, userPass);
+    @RequestMapping("/loginUser")
+    public Map loginUser(@RequestParam(value = "userName") String userName, @RequestParam(value = "userPass") String userPass) {
+        Map<String, String> map = tScLoginUserService.loadLoginUser(userName, userPass);
+//        if (map != null) {
+//            String token = JwtUtil.sign(userName, userPass);
+//            if (token != null) {
+//                return AjaxResult.success("成功", token);
+//            }
+//        }
+        return AjaxResult.error("无token 登录失败！");
     }
+
+    @ApiOperation(value = "token用户获取", httpMethod = "POST", notes = "token用户获取")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "token", paramType = "query", dataType = "String", required = true)
+    })
+    @RequestMapping("/getUser")
+    public Map getUser(@RequestParam(value = "token") String token) {
+//        if (JwtUtil.verity(token)) {
+//            return AjaxResult.success("成功", token);
+//        }
+        return AjaxResult.error("无token 获取失败！");
+    }
+
 }
