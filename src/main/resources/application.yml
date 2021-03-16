@@ -8,7 +8,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://172.16.124.128:3306/adm?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/adm?useUnicode=true&characterEncoding=utf8
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
@@ -24,7 +24,7 @@ spring:
     useGlobalDataSourceStat: true
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
-    host: 172.16.124.128
+    host: 192.168.100.7
     port: 6379
     database: 0
     jedis:
@@ -54,7 +54,7 @@ eureka:
   client:
     service-url:
       # 指定eureka server通信地址，注意/eureka/小尾巴不能少
-      defaultZone: http://localhost:8080/eureka/
+      defaultZone: http://192.168.100.230:8761/eureka/
   instance:
     # 是否注册IP到eureka server，如不指定或设为false，那就会注册主机名到eureka server
     prefer-ip-address: true

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.triber.demo.demo.common.AjaxResult;
+import org.triber.demo.demo.common.JwtUtil;
 import org.triber.demo.demo.common.R;
 import org.triber.demo.demo.common.RedisUtil;
 import org.triber.demo.demo.service.loginUser.ITScLoginUserService;
@@ -24,7 +25,7 @@ import java.util.Map;
  * @date: 2020-04-02
  */
 @RestController
-@RequestMapping("/tScLoginUser")
+@RequestMapping("/user")
 @Api(tags = "用户查询")
 public class TScLoginUserController {
     @Autowired
@@ -78,6 +79,12 @@ public class TScLoginUserController {
 //            return AjaxResult.success("成功", token);
 //        }
         return AjaxResult.error("无token 获取失败！");
+    }
+
+    @RequestMapping("/login")
+    public Map login( String firstName,  String lastName) {
+        System.out.println("-----"+firstName +"-----"+ lastName);
+        return AjaxResult.success("成功");
     }
 
 }
